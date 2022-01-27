@@ -48,32 +48,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [1] = LAYOUT(
-        _______, KC_MYCM, KC_WHOM, KC_CALC, KC_MSEL, KC_MPRV, KC_MNXT, KC_MPLY, KC_MSTP, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______,          _______,
-        _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_F13,  _______,          RGB_TOG,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,            _______,
         _______, _______, RGB_VAD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
-        _______,          _______, RGB_HUI, _______, _______, _______, NK_TOGG, _______, _______, _______, _______,          _______, RGB_MOD, _______,
+        _______,          _______, _______, KC_CALC, _______, _______, NK_TOGG, _______, _______, _______, _______,          _______, RGB_MOD, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, RGB_SPD, RGB_RMOD, RGB_SPI
     ),
-
-
+	
 };
 // clang-format on
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) {
-    switch(biton32(layer_state)){
-		case 1:
+    switch(get_highest_layer(layer_state)){
+		case 1: // layer 1: hue control
 			if (clockwise) {
-				tap_code16(RGB_HUI);
+				rgblight_increase_hue();
 			}
 			else {
-				tap_code16(RGB_HUD);
+				rgblight_decrease_hue();
 			}
 			break;
 			
-        default:
+        default: // layer 0: volume control
             if (clockwise) {
                 tap_code16(KC_VOLU);
             } 
@@ -86,3 +85,45 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 #endif // ENCODER_ENABLE
+
+// RGB LED layout
+
+// led number, function of the key
+
+//  67, Side led 01    0, ESC      6, F1       12, F2       18, F3       23, F4       28, F5       34, F6       39, F7       44, F8       50, F9       56, F10      61, F11      66, F12      69, Prt       Rotary(Mute)   68, Side led 12
+//  70, Side led 02    1, ~        7, 1        13, 2        19, 3        24, 4        29, 5        35, 6        40, 7        45, 8        51, 9        57, 0        62, -_       78, (=+)     85, BackSpc   72, Home       71, Side led 13
+//  73, Side led 03    2, Tab      8, Q        14, W        20. E        25, R        30, T        36, Y        41, U        46, I        52, O        58, P        63, [{       89, ]}       93, \|        75, End        74, Side led 14
+//  76, Side led 04    3, Caps     9, A        15, S        21, D        26, F        31, G        37, H        42, J        47, K        53, L        59, ;:       64, '"                    96, Enter     86, Insert     77, Side led 15
+//  80, Side led 05    4, Sh_L     10, Z       16, X        22, C        27, V        32, B        38, N        43, M        48, ,<       54, .<       60, /?                    90, Sh_R     94, Up        82, Delete     81, Side led 16
+//  83, Side led 06    5, Ct_L     11,Win_L    17, Alt_L                              33, SPACE                              49, Alt_R    55, FN                    65, Ct_R     95, Left     97, Down      79, Right      84, Side led 17
+//  87, Side led 07                                                                                                                                                                                                        88, Side led 18	
+//  91, Side led 08 
+
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+	
+	if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
+		RGB_MATRIX_INDICATOR_SET_COLOR(3, 255, 255, 255); // capslock
+		RGB_MATRIX_INDICATOR_SET_COLOR(2, 255, 255, 255); // tab
+		RGB_MATRIX_INDICATOR_SET_COLOR(4, 255, 255, 255); // left shift
+		RGB_MATRIX_INDICATOR_SET_COLOR(5, 255, 255, 255); // left ctrl
+		RGB_MATRIX_INDICATOR_SET_COLOR(11, 255, 255, 255); // windows
+		RGB_MATRIX_INDICATOR_SET_COLOR(17, 255, 255, 255); // left alt
+		RGB_MATRIX_INDICATOR_SET_COLOR(1, 255, 255, 255); // left light bar
+		RGB_MATRIX_INDICATOR_SET_COLOR(67, 255, 255, 255); // left light bar
+		RGB_MATRIX_INDICATOR_SET_COLOR(70, 255, 255, 255); // left light bar
+		RGB_MATRIX_INDICATOR_SET_COLOR(73, 255, 255, 255); // left light bar
+		RGB_MATRIX_INDICATOR_SET_COLOR(76, 255, 255, 255); // left light bar
+		RGB_MATRIX_INDICATOR_SET_COLOR(80, 255, 255, 255); // left light bar
+		RGB_MATRIX_INDICATOR_SET_COLOR(83, 255, 255, 255); // left light bar
+		RGB_MATRIX_INDICATOR_SET_COLOR(87, 255, 255, 255); // left light bar
+		RGB_MATRIX_INDICATOR_SET_COLOR(91, 255, 255, 255); // left light bar
+	}
+	
+	switch(get_highest_layer(layer_state)) {
+		case 1: // layer 1: light up function keys
+			//rgb code goes here
+			break;
+		default: //layer 0
+			break;
+	}
+}
