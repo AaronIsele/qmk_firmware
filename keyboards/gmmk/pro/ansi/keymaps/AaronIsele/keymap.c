@@ -15,6 +15,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#include "rgb_matrix_map.h"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -102,26 +103,17 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 	
 	if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
-		RGB_MATRIX_INDICATOR_SET_COLOR(3, 255, 255, 255); // capslock
-		RGB_MATRIX_INDICATOR_SET_COLOR(2, 255, 255, 255); // tab
-		RGB_MATRIX_INDICATOR_SET_COLOR(4, 255, 255, 255); // left shift
-		RGB_MATRIX_INDICATOR_SET_COLOR(5, 255, 255, 255); // left ctrl
-		RGB_MATRIX_INDICATOR_SET_COLOR(11, 255, 255, 255); // windows
-		RGB_MATRIX_INDICATOR_SET_COLOR(17, 255, 255, 255); // left alt
-		RGB_MATRIX_INDICATOR_SET_COLOR(1, 255, 255, 255); // left light bar
-		RGB_MATRIX_INDICATOR_SET_COLOR(67, 255, 255, 255); // left light bar
-		RGB_MATRIX_INDICATOR_SET_COLOR(70, 255, 255, 255); // left light bar
-		RGB_MATRIX_INDICATOR_SET_COLOR(73, 255, 255, 255); // left light bar
-		RGB_MATRIX_INDICATOR_SET_COLOR(76, 255, 255, 255); // left light bar
-		RGB_MATRIX_INDICATOR_SET_COLOR(80, 255, 255, 255); // left light bar
-		RGB_MATRIX_INDICATOR_SET_COLOR(83, 255, 255, 255); // left light bar
-		RGB_MATRIX_INDICATOR_SET_COLOR(87, 255, 255, 255); // left light bar
-		RGB_MATRIX_INDICATOR_SET_COLOR(91, 255, 255, 255); // left light bar
+		for (uint8_t i=0; i<sizeof(LED_CAPS_LOCK)/sizeof(LED_CAPS_LOCK[0]); i++) {
+			rgb_matrix_set_color(LED_CAPS_LOCK[i], 255, 255, 255);
+		}
 	}
 	
 	switch(get_highest_layer(layer_state)) {
 		case 1: // layer 1: light up function keys
-			//rgb code goes here
+			rgb_matrix_set_color_all(0, 0, 0);
+			for (uint8_t i=0; i<sizeof(LED_LAYER_ONE)/sizeof(LED_LAYER_ONE[0]); i++) {
+				rgb_matrix_set_color(LED_LAYER_ONE[i], 0, 0, 255);
+			}
 			break;
 		default: //layer 0
 			break;
