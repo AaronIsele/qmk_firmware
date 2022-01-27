@@ -16,6 +16,8 @@
 
 #pragma once
 
+#include "config_common.h"
+
 #define RGBLIGHT_HUE_STEP 1 // Setting color hue step interval
 #define RGBLIGHT_SLEEP // Turns off lights if PC is off
 
