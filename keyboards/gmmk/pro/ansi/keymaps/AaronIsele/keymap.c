@@ -17,6 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include "rgb_matrix_map.h"
 
+enum custom_keycodes {
+    ECS_1 = SAFE_RANGE,
+	BOT_1
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -39,6 +44,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // This keyboard defaults to 6KRO instead of NKRO for compatibility reasons (some KVMs and BIOSes are incompatible with NKRO).
     // Since this is, among other things, a "gaming" keyboard, a key combination to enable NKRO on the fly is provided for convenience.
     // Press Fn+N to toggle between 6KRO and NKRO. This setting is persisted to the EEPROM and thus persists between restarts.
+	
+	
+	
     [0] = LAYOUT(
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_PSCR,          KC_MUTE,
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_HOME,
@@ -50,8 +58,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [1] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_F13,  _______,          RGB_TOG,
-        _______, RGB_M_P, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,            _______,
+        _______, RGB_M_P, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          ECS_1,
+        _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,            BOT_1,
         _______, _______, RGB_VAD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
         _______,          _______, _______, KC_CALC, _______, _______, NK_TOGG, _______, _______, _______, _______,          _______, RGB_MOD, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, RGB_SPD, RGB_RMOD, RGB_SPI
@@ -60,6 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+// Rotary Knob Stuff
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) {
@@ -87,6 +96,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 #endif // ENCODER_ENABLE
 
+// RGB Stuff
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 	
 	if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
@@ -104,4 +114,31 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 		default: //layer 0
 			break;
 	}
+}
+
+// Macro stuff
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case ECS_1:
+        if (record->event.pressed) {
+			SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(300) "cmd" SS_DELAY(100) SS_TAP(X_ENT) SS_DELAY(500));
+            SEND_STRING(SS_DELAY(500) "wsl -d docker-desktop" SS_TAP(X_ENT) SS_DELAY(50));
+			SEND_STRING("sysctl -w vm.max_map_count=262144" SS_TAP(X_ENT) SS_DELAY(50));
+			SEND_STRING("exit" SS_TAP(X_ENT) SS_DELAY(50));
+			SEND_STRING("exit" SS_TAP(X_ENT) SS_DELAY(50));
+        } else {
+
+        }
+        break;
+		
+	case BOT_1:
+		if (record->event.pressed) {
+			SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(300) "git-bash" SS_DELAY(100) SS_TAP(X_ENT) SS_DELAY(1000));
+			SEND_STRING("location of A-A-Bot goes here");
+		} else {
+			
+		}
+		break;
+	};
+	return true;
 }
