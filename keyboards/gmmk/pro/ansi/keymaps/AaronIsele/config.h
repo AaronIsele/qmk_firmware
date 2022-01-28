@@ -18,10 +18,16 @@
 
 #include "config_common.h"
 
-#define RGBLIGHT_HUE_STEP 1 // Setting color hue step interval
-#define RGBLIGHT_SLEEP // Turns off lights if PC is off
+// #define RGBLIGHT_HUE_STEP 1 // Setting color hue step interval
+// #define RGBLIGHT_SLEEP // Turns off lights if PC is off
+// #define RGBLED_NUM 97
+
+#define DRIVER_1_LED_TOTAL 66
+#define DRIVER_2_LED_TOTAL 32
+#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 #ifdef RGB_MATRIX_ENABLE
-    #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_SOLID_COLOR
 	#define RGB_DISABLE_WHEN_USB_SUSPENDED
 #endif
+
+#define USB_POLLING_INTERVAL_MS 1 // 1000Hz polling rate

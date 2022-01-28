@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [1] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_F13,  _______,          RGB_TOG,
-        _______, RGB_MODE_SNAKE, RGB_MODE_KNIGHT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, RGB_M_P, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,            _______,
         _______, _______, RGB_VAD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
         _______,          _______, _______, KC_CALC, _______, _______, NK_TOGG, _______, _______, _______, _______,          _______, RGB_MOD, _______,
@@ -66,10 +66,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     switch(get_highest_layer(layer_state)){
 		case 1: // layer 1: hue control
 			if (clockwise) {
-				rgblight_increase_hue();
+				rgb_matrix_increase_hue();
 			}
 			else {
-				rgblight_decrease_hue();
+				rgb_matrix_decrease_hue();
 			}
 			break;
 			
@@ -91,14 +91,14 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 	
 	if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
 		for (uint8_t i=0; i<sizeof(LED_CAPS_LOCK)/sizeof(LED_CAPS_LOCK[0]); i++) {
-			rgb_matrix_set_color(LED_CAPS_LOCK[i], 255, 255, 255);
+			rgb_matrix_set_color(LED_CAPS_LOCK[i], RGB_RED);
 		}
 	}
 	
 	switch(get_highest_layer(layer_state)) {
 		case 1: // layer 1: light up function keys
 			for (uint8_t i=0; i<sizeof(LED_LAYER_ONE)/sizeof(LED_LAYER_ONE[0]); i++) {
-				rgb_matrix_set_color(LED_LAYER_ONE[i], 255, 255, 255);
+				rgb_matrix_set_color(LED_LAYER_ONE[i], RGB_WHITE);
 			}
 			break;
 		default: //layer 0

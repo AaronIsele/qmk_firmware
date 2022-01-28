@@ -87,7 +87,7 @@
         LED_F12, // 66, F12, ka5
         LED_L1, // 67, LED, l01
         LED_R1, // 68, LED, l11
-        LED_INS, // 69, Prt, k97  -- remapped to INS
+        LED_PRT, // 69, Prt, k97
         LED_L2, // 70, LED, l02
         LED_R2, // 71, LED, l12
         LED_DEL, // 72, Del, k65
@@ -120,7 +120,7 @@
 
 	const uint8_t LED_CAPS_LOCK[] = {LED_CAPS, LED_GRV, LED_TAB, LED_LSFT, LED_LCTL, LED_LALT, LED_LWIN, LED_L1, LED_L2, LED_L3, LED_L4, LED_L5, LED_L6, LED_L7, LED_L8};
 	
-	const uint8_t LED_LAYER_ONE[] = {LED_W, LED_S, LED_C, LED_N, LED_FN, LED_F12, LED_BSLS, LED_UP, LED_DOWN, LED_LEFT, LED_RIGHT};
+	const uint8_t LED_LAYER_ONE[] = {LED_1, LED_W, LED_S, LED_C, LED_N, LED_FN, LED_F12, LED_BSLS, LED_UP, LED_DOWN, LED_LEFT, LED_RIGHT};
 	
     const uint8_t LED_SIDE_LEFT[] = { LED_L1, LED_L2, LED_L3, LED_L4, LED_L5, LED_L6, LED_L7, LED_L8};
 
