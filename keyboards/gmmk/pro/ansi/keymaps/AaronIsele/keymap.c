@@ -101,7 +101,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 	
 	if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
 		for (uint8_t i=0; i<sizeof(LED_CAPS_LOCK)/sizeof(LED_CAPS_LOCK[0]); i++) {
-			rgb_matrix_set_color(LED_CAPS_LOCK[i], RGB_RED);
+			rgb_matrix_set_color(LED_CAPS_LOCK[i], RGB_WHITE);
 		}
 	}
 	

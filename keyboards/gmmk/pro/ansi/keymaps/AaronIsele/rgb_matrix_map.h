@@ -90,21 +90,21 @@
         LED_PRT, // 69, Prt, k97
         LED_L2, // 70, LED, l02
         LED_R2, // 71, LED, l12
-        LED_DEL, // 72, Del, k65
+        LED_HOME, // 72, Home, k65
         LED_L3, // 73, LED, l03
         LED_R3, // 74, LED, l13
-        LED_PGUP, // 75, PgUp, k15
+        LED_END, // 75, PgUp, k15
         LED_L4, // 76, LED, l04
         LED_R4, // 77, LED, l14
         LED_EQL, // 78, =, k66
         LED_RIGHT, // 79, Right, k05
         LED_L5, // 80, LED, l05
         LED_R5, // 81, LED, l15
-        LED_END, // 82, End, k75
+        LED_DEL, // 82, Delete, k75
         LED_L6, // 83, LED, l06
         LED_R6, // 84, LED, l16
         LED_BSPC, // 85, BSpc, ka1
-        LED_PGDN, // 86, PgDn, k25
+        LED_INS, // 86, Insert, k25
         LED_L7, // 87, LED, l07
         LED_R7, // 88, LED, l17
         LED_RBRC, // 89, ], k61
@@ -117,10 +117,19 @@
         LED_ENT, // 96, Enter, ka4
         LED_DOWN // 97, Down, k73
     };
+	
+//  67, Side led 01    0, ESC      6, F1       12, F2       18, F3       23, F4       28, F5       34, F6       39, F7       44, F8       50, F9       56, F10      61, F11      66, F12      69, Prt       Rotary(Mute)   68, Side led 12
+//  70, Side led 02    1, ~        7, 1        13, 2        19, 3        24, 4        29, 5        35, 6        40, 7        45, 8        51, 9        57, 0        62, -_       78, (=+)     85, BackSpc   72, Del        71, Side led 13
+//  73, Side led 03    2, Tab      8, Q        14, W        20. E        25, R        30, T        36, Y        41, U        46, I        52, O        58, P        63, [{       89, ]}       93, \|        75, PgUp       74, Side led 14
+//  76, Side led 04    3, Caps     9, A        15, S        21, D        26, F        31, G        37, H        42, J        47, K        53, L        59, ;:       64, '"                    96, Enter     86, PgDn       77, Side led 15
+//  80, Side led 05    4, Sh_L     10, Z       16, X        22, C        27, V        32, B        38, N        43, M        48, ,<       54, .<       60, /?                    90, Sh_R     94, Up        82, End        81, Side led 16
+//  83, Side led 06    5, Ct_L     11,Win_L    17, Alt_L                              33, SPACE                              49, Alt_R    55, FN                    65, Ct_R     95, Left     97, Down      79, Right      84, Side led 17
+//  87, Side led 07                                                                                                                                                                                                        88, Side led 18
+//  91, Side led 08  
 
 	const uint8_t LED_CAPS_LOCK[] = {LED_CAPS, LED_GRV, LED_TAB, LED_LSFT, LED_LCTL, LED_LALT, LED_LWIN, LED_L1, LED_L2, LED_L3, LED_L4, LED_L5, LED_L6, LED_L7, LED_L8};
 	
-	const uint8_t LED_LAYER_ONE[] = {LED_1, LED_W, LED_S, LED_C, LED_N, LED_FN, LED_F12, LED_BSLS, LED_UP, LED_DOWN, LED_LEFT, LED_RIGHT};
+	const uint8_t LED_LAYER_ONE[] = {LED_1, LED_W, LED_S, LED_C, LED_N, LED_FN, LED_F12, LED_BSLS, LED_UP, LED_DOWN, LED_LEFT, LED_RIGHT, LED_HOME, LED_END};
 	
     const uint8_t LED_SIDE_LEFT[] = { LED_L1, LED_L2, LED_L3, LED_L4, LED_L5, LED_L6, LED_L7, LED_L8};
 
