@@ -18,10 +18,6 @@
 
 #include "config_common.h"
 
-// #define RGBLIGHT_HUE_STEP 1 // Setting color hue step interval
-// #define RGBLIGHT_SLEEP // Turns off lights if PC is off
-// #define RGBLED_NUM 97
-
 #define DRIVER_1_LED_TOTAL 66
 #define DRIVER_2_LED_TOTAL 32
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
